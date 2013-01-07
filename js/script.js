@@ -6,6 +6,8 @@ $(document).ready(function() {
 
 		$("#loading").removeClass("hide");
 		$("#table2").remove();
+		$("#counter h3").html("");
+		$(".table").html("");
 
 		$.getJSON("http://openstates.org/api/v1/bills/?q=" + searchTerm + "&state=ut&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
 
