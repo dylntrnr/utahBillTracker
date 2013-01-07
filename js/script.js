@@ -18,6 +18,8 @@ $(document).ready(function() {
 						$('#table2').append('<tr><td>' + i + '</td><td>' + JSON.parse(JSON.stringify(json[i].title)) + '</td><td>' + JSON.parse(JSON.stringify(json[i].bill_id)) +'</td>' + '</th><td>' + JSON.parse(JSON.stringify(json[i].created_at)) + '</th><td>' + JSON.parse(JSON.stringify(json[i].subjects)) +'<td></tr>');
 					}
 
+					$("#counter h3").html("Found: " + i + " results.")
+
 				}
 			} else {
 				$(".table").html('<h2 class="loading">We\'re afraid nothing was found for that search. Try again.');
