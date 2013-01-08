@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	
+	// This is all @geuis ---- lifesaver! 
 	var autocomplete = $('#term').typeahead()
         .on('keyup', function(ev){
  
