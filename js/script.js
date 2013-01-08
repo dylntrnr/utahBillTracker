@@ -1,4 +1,12 @@
 $(document).ready(function() {
+
+	$('#term').typeahead({
+		source: function (query, process) {
+			options = [];
+			var data = $.getJSON("http://openstates.org/api/v1/bills/?state=ut&fields=first_name&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?");
+			console.log(data);
+		}
+	});
 	
 	var getBill = function () {
 
@@ -20,7 +28,7 @@ $(document).ready(function() {
 						$('#table2').append('<tr><td>' + i + '</td><td>' + JSON.parse(JSON.stringify(json[i].title)) + '</td><td>' + JSON.parse(JSON.stringify(json[i].bill_id)) +'</td>' + '</th><td>' + JSON.parse(JSON.stringify(json[i].created_at)) + '</th><td>' + JSON.parse(JSON.stringify(json[i].subjects)) +'<td></tr>');
 					}
 
-					$("#counter h3").html("Found: " + i + " results.")
+					$("#counter h3").html("Found: " + i + " results.");
 
 				}
 			} else {
