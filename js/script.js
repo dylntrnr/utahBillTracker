@@ -4,6 +4,7 @@ $(document).ready(function() {
 	
 	$.getJSON("http://openstates.org/api/v1/bills/?q=utah&state=ut&fields=title&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function (json) {
 		stuff.push(json);
+		$('#searchBox').removeClass("hide");
 	});
 
 	// This is all @geuis ---- lifesaver! 
@@ -37,7 +38,7 @@ $(document).ready(function() {
                         var arr = [],
                             i=stuff[0].length;
                         while(i--){
-                            arr[i] = stuff[0][i].title
+                            arr[i] = $.trim(stuff[0][i].title)
                         }
                         //set your results into the typehead's source
                         self.data('typeahead').source = arr;
@@ -70,7 +71,7 @@ $(document).ready(function() {
 					if (i === 0) {
 						$('#table').append('<thead id="table2"><tr><th>#</th><th>title</th><th>bill Id</th><th>created</th><th>subjects</th></tr></thead>');
 					} else {
-						$('#table2').append('<tr><td>' + i + '</td><td>' + JSON.parse(JSON.stringify(json[i].title)) + '</td><td>' + JSON.parse(JSON.stringify(json[i].bill_id)) +'</td>' + '</th><td>' + JSON.parse(JSON.stringify(json[i].created_at)) + '</th><td>' + JSON.parse(JSON.stringify(json[i].subjects)) +'<td></tr>');
+						$('#table2').append('<tr><td>' + i + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].title))) + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].bill_id))) +'</td>' + '</th><td>' + $.trim(JSON.parse(JSON.stringify(json[i].session))) + '</th><td>' + $.trim(JSON.parse(JSON.stringify(json[i].subjects))) +'<td></tr>');
 					}
 
 					$("#counter h3").html("Found: " + i + " results.");
