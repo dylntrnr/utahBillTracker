@@ -74,6 +74,7 @@ $(document).ready(function() {
 					}
 
 					$("#counter h3").html("Found: " + i + " results.");
+					$("#loading").addClass("hide");
 
 				}
 			} else {
