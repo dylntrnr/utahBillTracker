@@ -71,7 +71,7 @@ $(document).ready(function() {
 					if (i === 0) {
 						$('#table').append('<thead id="table2"><tr><th>#</th><th>title</th><th>bill Id</th><th>created</th><th>subjects</th></tr></thead>');
 					} else {
-						$('#table2').append('<tr><td>' + i + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].title))) + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].bill_id))) +'</td>' + '</th><td>' + $.trim(JSON.parse(JSON.stringify(json[i].session))) + '</th><td>' + $.trim(JSON.parse(JSON.stringify(json[i].subjects))) +'<td></tr>');
+						$('#table').append('<tbody><tr id="test"><td>' + i + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].title))) + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].bill_id))) +'</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].session))) + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].subjects))) +'</td></tr></tbody>');
 					}
 
 					$("#counter h3").html("Found: " + i + " results.");
@@ -80,10 +80,12 @@ $(document).ready(function() {
 				}
 			} else {
 				$(".table").html('<h2 class="loading">We\'re afraid nothing was found for that search. Try again.');
+				$("#loading").addClass("hide");
 			}
 		});
 
 	};
+
 
 	$('#search').click(getBill);
 	$('#term').keyup(function(event){
