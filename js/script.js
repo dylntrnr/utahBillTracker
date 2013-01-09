@@ -74,7 +74,7 @@ $(document).ready(function() {
 
 		$.getJSON("http://openstates.org/api/v1/bills/?q=" + searchTerm + "&state=ut&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
 
-			if (json.length !== 0 && json[0].action_dates.length === 0) {
+			if (json.length !== 0 && !json[0].hasOwnProperty("sponsors")) {
 				for (var i = 0; i < json.length; i++) {
 					if (i === 0) {
 						$('#table').append('<thead id="table2"><tr><th>#</th><th>title</th><th>bill Id</th><th>created</th><th>subjects</th></tr></thead>');
