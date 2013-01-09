@@ -13,33 +13,42 @@
 	
 	<body>
 		
-		<div>
+		<div class="container">
 			
-			<div class="container">
+			<div class="masthead">
 				
-				<div class="masthead">
-					
-					<h1>Utah State Legislative Bill Search</h1>
-					
-				</div>
-				<div id="betterUtah">
-				<img src="http://patrickthompson.me/abubillsearch/abu-billsearchsponsorbug.png" alt="A Better UTAH Project" title="A Better UTAH Project" />
-				</div>
+				<h1>Utah State Legislative Bill Search</h1>
 				
+			</div>
+			<div id="betterUtah">
+			<img src="http://patrickthompson.me/abubillsearch/abu-billsearchsponsorbug.png" alt="A Better UTAH Project" title="A Better UTAH Project" />
+			</div>
+			
+			
+			<p id="description">Please use the search function below to find pending bills in the Utah State Legislature. If you know the Bill ID of a specific bill, you can enter that to find more information pertaining to that bill. Otherwise, you can enter keywords, to discover more about the bills being proposed at the legislature. Also, for a full list of bills, leave the search field blank and hit the search button.</p>
+			
+			<div id="searchBox" class="hide" style="margin:0 auto; width:260px;">
+			
+				<label for="" class="radio">
+					<input type="radio" name="optionsRadios" id="optionsRadio1" value="option1" checked>Title - for basic information
+				</label>
+				<label for="" class="radio">
+					<input type="radio" name="optionsRadios" id="optionsRadio2" value="option2">Id - for detailed information
+				</label>
+				<!-- <label for="" class="radio inline">
+					<input type="radio" name="optionsRadios" id="optionsRadio3" value="option3">Session
+				</label> -->
 				
-				<p id="description">Please use the search function below to find pending bills in the Utah State Legislature. If you know the Bill ID of a specific bill, you can enter that to find more information pertaining to that bill. Otherwise, you can enter keywords, to discover more about the bills being proposed at the legislature. Also, for a full list of bills, leave the search field blank and hit the search button.</p>
-				<div id="searchBox" class="hide" style="margin:0 auto; width:260px;">
+			
 				<input type="text" class="input-medium search-query" data-provide="typeahead" id="term" placeholder="Search for bills..." autocomplete="off">
 				<button id="search" class="btn">Search</button>
-				</div>
-					
-					
-				
-					<div id="counter">
-						<h3></h3>
-					</div>
-					
 			</div>
+				
+				
+			
+				<div id="counter">
+					<h3></h3>
+				</div>
 			
 			<div class="container">
 				

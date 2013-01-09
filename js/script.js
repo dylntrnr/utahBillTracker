@@ -2,7 +2,7 @@ stuff = [];
 
 $(document).ready(function() {
 	
-	$.getJSON("http://openstates.org/api/v1/bills/?q=utah&state=ut&fields=title&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function (json) {
+	$.getJSON("http://openstates.org/api/v1/bills/?state=ut&fields=title&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function (json) {
 		stuff.push(json);
 		$('#searchBox').removeClass("hide");
 	});
@@ -59,7 +59,6 @@ $(document).ready(function() {
 		var searchTerm = $('#term').val();
 
 		$("#loading").removeClass("hide");
-		$("#table2").remove();
 		$("#counter h3").html("");
 		$(".table").html("");
 
