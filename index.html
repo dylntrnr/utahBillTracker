@@ -29,16 +29,16 @@
 			
 			<div id="searchBox" class="hide" style="margin:0 auto; width:260px;">
 			
-				<label for="" class="radio">
-					<input type="radio" name="optionsRadios" id="optionsRadio1" value="option1" checked>Title - for basic information
+				<label class="radio">
+					<input type="radio" name="optionsRadios" id="optionsRadio1" value="title" checked>Title - for basic information
 				</label>
-				<label for="" class="radio">
-					<input type="radio" name="optionsRadios" id="optionsRadio2" value="option2">Id - for detailed information
+				<label class="radio">
+					<input type="radio" name="optionsRadios" id="optionsRadio2" value="bill_id">Id - for detailed information
 				</label>
-				<!-- <label for="" class="radio inline">
+				<!-- <label class="radio inline">
 					<input type="radio" name="optionsRadios" id="optionsRadio3" value="option3">Session
 				</label> -->
-				
+				<div class="hide" id="session"><input type="" class="input-small" placeholder="Session Year..."></div>
 			
 				<input type="text" class="input-medium search-query" data-provide="typeahead" id="term" placeholder="Search for bills..." autocomplete="off">
 				<button id="search" class="btn">Search</button>

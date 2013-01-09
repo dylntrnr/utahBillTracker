@@ -54,18 +54,27 @@ $(document).ready(function() {
             }
         });
 	
-	var getBill = function () {
+	var getBillInfo = function () {
 
+		// check which radio button is pushed
+		// 
+		// then call the appropriate searchBills or getBill
+		// 
+		searchBills();
+
+	};
+
+
+	var searchBills = function () {
+		
 		var searchTerm = $('#term').val();
-
 		$("#loading").removeClass("hide");
 		$("#counter h3").html("");
 		$(".table").html("");
 
 		$.getJSON("http://openstates.org/api/v1/bills/?q=" + searchTerm + "&state=ut&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
 
-			if (json.length !== 0) {
-
+			if (json.length !== 0 && json[0].action_dates.length === 0) {
 				for (var i = 0; i < json.length; i++) {
 					if (i === 0) {
 						$('#table').append('<thead id="table2"><tr><th>#</th><th>title</th><th>bill Id</th><th>created</th><th>subjects</th></tr></thead>');
@@ -77,19 +86,32 @@ $(document).ready(function() {
 					$("#loading").addClass("hide");
 
 				}
-			} else {
+			} else if (json.length === 0) {
 				$(".table").html('<h2 class="loading">We\'re afraid nothing was found for that search. Try again.');
 				$("#loading").addClass("hide");
+			} else  {
+				console.log("call get unique bill");
 			}
 		});
-
 	};
 
 
-	$('#search').click(getBill);
+	// Radio functionality
+	
+	
+	$("input[name='optionsRadios']").click(function () {
+		if ($("input[name='optionsRadios']:checked").val() === "bill_id") {
+			$("#session").removeClass("hide");
+		} else{
+			$("#session").addClass("hide");
+		}
+	});
+
+
+	$('#search').click(getBillInfo);
 	$('#term').keyup(function(event){
 		if(event.keyCode == 13){
-			getBill();
+			getBillInfo();
     }
 	});
 
