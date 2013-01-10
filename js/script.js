@@ -1,9 +1,9 @@
-stuff = [];
+utTitle = [];
 
 $(document).ready(function() {
 	
 	$.getJSON("http://openstates.org/api/v1/bills/?state=ut&fields=title&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function (json) {
-		stuff.push(json);
+		utTitle.push(json);
 		$('#searchBox').removeClass("hide");
 	});
 
@@ -28,7 +28,7 @@ $(document).ready(function() {
                     self.data('active', true);
  
                     //Do data request. Insert your own API logic here.
-                    $.grep(stuff, function() {
+                    $.grep(utTitle, function() {
  
                         //set this to true when your callback executes
                         self.data('active',true);
@@ -36,9 +36,9 @@ $(document).ready(function() {
                         //Filter out your own parameters. Populate them into an array, since this is what typeahead's source requires
  						
                         var arr = [],
-                            i=stuff[0].length;
+                            i=utTitle[0].length;
                         while(i--){
-                            arr[i] = $.trim(stuff[0][i].title)
+                            arr[i] = $.trim(utTitle[0][i].title)
                         }
                         //set your results into the typehead's source
                         self.data('typeahead').source = arr;
@@ -53,31 +53,64 @@ $(document).ready(function() {
                 }
             }
         });
-	
-	var getBillInfo = function () {
 
-		// check which radio button is pushed
-		// 
-		// then call the appropriate searchBills or getBill
-		// 
-		searchBills();
+	// search for specific bill and get detailed information returned
+	var getBill = function () {
+		var session = $('#sessionInput').val();
+		var billId = $('#term').val();
+		$("#loading").removeClass("hide");
+		$("#counter h3").html("");
+		$(".table").html("");
+
+		$.getJSON("http://openstates.org/api/v1/bills/ut/" + session + "/" + billId +"?apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
+
+			$('#table').append('<thead id="table2"><tr></tr></thead><tbody><tr></tr></tbody>');
+
+			keys = [];
+			// Setup the table headings
+			for ( var key in json) {
+				if (json.hasOwnProperty(key)) {
+					$('#table thead tr').append('<th>' + key + '</th>');
+					// $('#table tbody tr').append('<td>' + json.key + '</td>');
+					console.log(json);
+				}
+			}
+
+			
+
+			if (json.length !== 0) {
+				for (var i = 0; i < json.length; i++) {
+					if (i === 0) {
+						$('#table').append('<thead id="table2"><tr><th>#</th><th>yes votes</th><th>bill Id</th><th>session</th><th>subjects</th></tr></thead>');
+					} else {
+						$('#table').append('<tbody><tr id="test"><td>' + i + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].votes.yes_count))) + '</td></tr></tbody>');
+					}
+
+					$("#counter h3").html("Found: " + i + " results.");
+					$("#loading").addClass("hide");
+
+				}
+			} else{
+				$(".table").html('<h2 class="loading">We\'re afraid nothing was found for that search. Try again.');
+				$("#loading").addClass("hide");
+			}
+		});
 
 	};
 
-
+	// search for non - specific bill
 	var searchBills = function () {
 		
 		var searchTerm = $('#term').val();
 		$("#loading").removeClass("hide");
 		$("#counter h3").html("");
 		$(".table").html("");
-
 		$.getJSON("http://openstates.org/api/v1/bills/?q=" + searchTerm + "&state=ut&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
 
 			if (json.length !== 0 && !json[0].hasOwnProperty("sponsors")) {
 				for (var i = 0; i < json.length; i++) {
 					if (i === 0) {
-						$('#table').append('<thead id="table2"><tr><th>#</th><th>title</th><th>bill Id</th><th>created</th><th>subjects</th></tr></thead>');
+						$('#table').append('<thead id="table2"><tr><th>#</th><th>title</th><th>bill Id</th><th>session</th><th>subjects</th></tr></thead>');
 					} else {
 						$('#table').append('<tbody><tr id="test"><td>' + i + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].title))) + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].bill_id))) +'</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].session))) + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].subjects))) +'</td></tr></tbody>');
 					}
@@ -95,24 +128,34 @@ $(document).ready(function() {
 		});
 	};
 
+	// check which radio button is selected and search appropriatly 
+	var checkAndSearch = function () {
+		if ($("input[name='optionsRadios']:checked").val() === "bill_id") {
+			getBill();
+		} else{
+			searchBills();
+		}
+	};
 
 	// Radio functionality
-	
 	
 	$("input[name='optionsRadios']").click(function () {
 		if ($("input[name='optionsRadios']:checked").val() === "bill_id") {
 			$("#session").removeClass("hide");
+			
 		} else{
 			$("#session").addClass("hide");
 		}
 	});
 
+	// hitting search button / enter
 
-	$('#search').click(getBillInfo);
+	$('#search').click(checkAndSearch);
 	$('#term').keyup(function(event){
 		if(event.keyCode == 13){
-			getBillInfo();
-    }
+			checkAndSearch();
+		}
 	});
+
 
 });
