@@ -78,22 +78,22 @@ $(document).ready(function() {
 
 			
 
-			if (json.length !== 0) {
-				for (var i = 0; i < json.length; i++) {
-					if (i === 0) {
-						$('#table').append('<thead id="table2"><tr><th>#</th><th>yes votes</th><th>bill Id</th><th>session</th><th>subjects</th></tr></thead>');
-					} else {
-						$('#table').append('<tbody><tr id="test"><td>' + i + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].votes.yes_count))) + '</td></tr></tbody>');
-					}
+			// if (json.length !== 0) {
+			// 	for (var i = 0; i < json.length; i++) {
+			// 		if (i === 0) {
+			// 			$('#table').append('<thead id="table2"><tr><th>#</th><th>yes votes</th><th>bill Id</th><th>session</th><th>subjects</th></tr></thead>');
+			// 		} else {
+			// 			$('#table').append('<tbody><tr id="test"><td>' + i + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].votes.yes_count))) + '</td></tr></tbody>');
+			// 		}
 
-					$("#counter h3").html("Found: " + i + " results.");
-					$("#loading").addClass("hide");
+			// 		$("#counter h3").html("Found: " + i + " results.");
+			// 		$("#loading").addClass("hide");
 
-				}
-			} else{
-				$(".table").html('<h2 class="loading">We\'re afraid nothing was found for that search. Try again.');
-				$("#loading").addClass("hide");
-			}
+			// 	}
+			// } else{
+			// 	$(".table").html('<h2 class="loading">We\'re afraid nothing was found for that search. Try again.');
+			// 	$("#loading").addClass("hide");
+			// }
 		});
 
 	};
@@ -107,15 +107,17 @@ $(document).ready(function() {
 		$(".table").html("");
 		$.getJSON("http://openstates.org/api/v1/bills/?q=" + searchTerm + "&state=ut&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
 
+			$('#table').append('<thead id="table2"><tr></tr></thead><tbody><tr></tr></tbody>');
+
 			if (json.length !== 0 && !json[0].hasOwnProperty("sponsors")) {
-				for (var i = 0; i < json.length; i++) {
-					if (i === 0) {
-						$('#table').append('<thead id="table2"><tr><th>#</th><th>title</th><th>bill Id</th><th>session</th><th>subjects</th></tr></thead>');
+				for (var i = json.length; i > 0; i--) {
+					if (i === json.length) {
+						$('#table thead tr').append('<th>#</th><th>title</th><th>bill Id</th><th>session</th><th>subjects</th>');
 					} else {
-						$('#table').append('<tbody><tr id="test"><td>' + i + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].title))) + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].bill_id))) +'</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].session))) + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].subjects))) +'</td></tr></tbody>');
+						$('#table tbody').append('<tr><td><strong>' + i + '</strong></td><td>' + $.trim(json[i].title) + '</td><td>' + $.trim(json[i].bill_id) +'</td><td>' + $.trim(json[i].session) + '</td><td>' + $.trim(json[i].subjects) +'</td></tr>');
 					}
 
-					$("#counter h3").html("Found: " + i + " results.");
+					$("#counter h3").html("Found: " + (json.length-1) + " results.");
 					$("#loading").addClass("hide");
 
 				}
