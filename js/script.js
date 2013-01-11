@@ -66,15 +66,33 @@ $(document).ready(function() {
 
 			$('#table').append('<thead id="table2"><tr></tr></thead><tbody><tr></tr></tbody>');
 
-			keys = [];
-			// Setup the table headings
-			for ( var key in json) {
-				if (json.hasOwnProperty(key)) {
-					$('#table thead tr').append('<th>' + key + '</th>');
-					// $('#table tbody tr').append('<td>' + json.key + '</td>');
-					console.log(json);
-				}
-			}
+			console.log(json);
+			// if (json.length !== 0) {
+			// 	for (var i = json.length; i > 0; i--) {
+			// 		if (i === json.length) {
+			// 			$('#table thead tr').append('<th>#</th><th>title</th><th>chamber</th><th>bill id</th><th>yes count</th>');
+			// 		} else {
+			// 			$('#table tbody').append('<tr><td><strong>' + i + '</strong></td><td>' + $.trim(json[i].title) + '</td><td>' + $.trim(json[i].bill_id) +'</td><td>' + $.trim(json[i].session) + '</td><td>' + $.trim(json[i].subjects) +'</td></tr>');
+			// 		}
+
+			// 		$("#counter h3").html("Found: " + (json.length-1) + " results.");
+			// 		$("#loading").addClass("hide");
+
+			// 	}
+			// } else if (json.length === 0) {
+			// 	$(".table").html('<h2 class="loading">We\'re afraid nothing was found for that search. Try again.');
+			// 	$("#loading").addClass("hide");
+			// }
+
+			// keys = [];
+			// // Setup the table headings
+			// for ( var key in json) {
+			// 	if (json.hasOwnProperty(key)) {
+			// 		$('#table thead tr').append('<th>' + key + '</th>');
+			// 		// $('#table tbody tr').append('<td>' + json.key + '</td>');
+			// 		console.log(json);
+			// 	}
+			// }
 
 			
 
@@ -125,7 +143,7 @@ $(document).ready(function() {
 				$(".table").html('<h2 class="loading">We\'re afraid nothing was found for that search. Try again.');
 				$("#loading").addClass("hide");
 			} else  {
-				console.log("call get unique bill");
+				getBill();
 			}
 		});
 	};
