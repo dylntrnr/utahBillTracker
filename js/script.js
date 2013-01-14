@@ -58,7 +58,7 @@ $(document).ready(function() {
 		if(typeof(value) == "object") {
 			$.each(value, display);
 		} else {
-			$("#testing").append("<div class='row'><div class='span1' id=" + $.trim(key) + $.trim(counter) + ">" + $.trim(key) + "</div><div class='span3 offset2'>" + $.trim(value) + "</div>");
+			$("#testing").append("<div class='row'><div class='span1' id=" + $.trim(key) + $.trim(counter) + "><strong>" + $.trim(key) + "</strong></div><div class='span4 offset1'>" + $.trim(value) + "</div>");
 		}
 		counter += 1;
 	};
@@ -68,8 +68,8 @@ $(document).ready(function() {
 		var session = $("#sessionInput").val();
 		var billId = $("#term").val();
 		$("#loading").removeClass("hide");
-		$("#counter h3").html("");
-		$(".table").html("");
+
+		resetHtml();
 
 		$.getJSON("http://openstates.org/api/v1/bills/ut/" + session + "/" + billId +"?fields=bill_id,sponsors,title,chamber,actions.date,actions.actor,actions.action,sponsors.name,sponsors.type,votes.yes_count,votes.data,votes.chamber,votes.motion,votes.no_count,votes.type,sources,versions.url,versions.name,votes.passed&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
 
@@ -83,13 +83,20 @@ $(document).ready(function() {
 
 	};
 
+	// reset the html everything
+	var resetHtml = function () {
+		$("#loading").removeClass("hide");
+		$("#counter h3").html("");
+		$(".table").html("");
+		$("#testing").html("");
+		counter = 0;
+	};
 	// search for non - specific bill
 	var searchBills = function () {
 		
 		var searchTerm = $('#term').val();
-		$("#loading").removeClass("hide");
-		$("#counter h3").html("");
-		$(".table").html("");
+		resetHtml();
+		
 		$.getJSON("http://openstates.org/api/v1/bills/?q=" + searchTerm + "&state=ut&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
 
 			$('#table').append('<thead id="table2"><tr></tr></thead><tbody><tr></tr></tbody>');
@@ -107,7 +114,7 @@ $(document).ready(function() {
 
 				}
 			} else if (json.length === 0) {
-				$(".table").html('<h2 class="loading">We\'re afraid nothing was found for that search. Try again.');
+				$(".table").html('<h2 class="loading">By golly, nothing came up with that search. Try again.');
 				$("#loading").addClass("hide");
 			} else  {
 				getBill();
