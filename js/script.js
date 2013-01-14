@@ -54,64 +54,31 @@ $(document).ready(function() {
             }
         });
 
+	display = function (key, value) {
+		if(typeof(value) == "object") {
+			$.each(value, display);
+		} else {
+			$("#table2").append("<th>"+ key + "</th>");
+			$("#table2").append("<tr><td>" + value);
+		}
+	};
+
 	// search for specific bill and get detailed information returned
 	var getBill = function () {
-		var session = $('#sessionInput').val();
-		var billId = $('#term').val();
+		var session = $("#sessionInput").val();
+		var billId = $("#term").val();
 		$("#loading").removeClass("hide");
 		$("#counter h3").html("");
 		$(".table").html("");
 
-		$.getJSON("http://openstates.org/api/v1/bills/ut/" + session + "/" + billId +"?apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
+		$.getJSON("http://openstates.org/api/v1/bills/ut/" + session + "/" + billId +"?fields=bill_id,sponsors,title,chamber,actions.date,actions.actor,actions.action,sponsors.name,sponsors.type,votes.yes_count,votes.data,votes.chamber,votes.motion,votes.no_count,votes.passed,votes.type,sources,versions.url,versions.name&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
 
 			$('#table').append('<thead id="table2"><tr></tr></thead><tbody><tr></tr></tbody>');
 
-			console.log(json);
-			// if (json.length !== 0) {
-			// 	for (var i = json.length; i > 0; i--) {
-			// 		if (i === json.length) {
-			// 			$('#table thead tr').append('<th>#</th><th>title</th><th>chamber</th><th>bill id</th><th>yes count</th>');
-			// 		} else {
-			// 			$('#table tbody').append('<tr><td><strong>' + i + '</strong></td><td>' + $.trim(json[i].title) + '</td><td>' + $.trim(json[i].bill_id) +'</td><td>' + $.trim(json[i].session) + '</td><td>' + $.trim(json[i].subjects) +'</td></tr>');
-			// 		}
-
-			// 		$("#counter h3").html("Found: " + (json.length-1) + " results.");
-			// 		$("#loading").addClass("hide");
-
-			// 	}
-			// } else if (json.length === 0) {
-			// 	$(".table").html('<h2 class="loading">We\'re afraid nothing was found for that search. Try again.');
-			// 	$("#loading").addClass("hide");
-			// }
-
-			// keys = [];
-			// // Setup the table headings
-			// for ( var key in json) {
-			// 	if (json.hasOwnProperty(key)) {
-			// 		$('#table thead tr').append('<th>' + key + '</th>');
-			// 		// $('#table tbody tr').append('<td>' + json.key + '</td>');
-			// 		console.log(json);
-			// 	}
-			// }
-
+			$.each(json, display);
 			
-
-			// if (json.length !== 0) {
-			// 	for (var i = 0; i < json.length; i++) {
-			// 		if (i === 0) {
-			// 			$('#table').append('<thead id="table2"><tr><th>#</th><th>yes votes</th><th>bill Id</th><th>session</th><th>subjects</th></tr></thead>');
-			// 		} else {
-			// 			$('#table').append('<tbody><tr id="test"><td>' + i + '</td><td>' + $.trim(JSON.parse(JSON.stringify(json[i].votes.yes_count))) + '</td></tr></tbody>');
-			// 		}
-
-			// 		$("#counter h3").html("Found: " + i + " results.");
-			// 		$("#loading").addClass("hide");
-
-			// 	}
-			// } else{
-			// 	$(".table").html('<h2 class="loading">We\'re afraid nothing was found for that search. Try again.');
-			// 	$("#loading").addClass("hide");
-			// }
+			$("#loading").addClass("hide");
+			
 		});
 
 	};
@@ -176,6 +143,5 @@ $(document).ready(function() {
 			checkAndSearch();
 		}
 	});
-
 
 });
