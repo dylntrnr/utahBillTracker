@@ -53,14 +53,14 @@ $(document).ready(function() {
                 }
             }
         });
-
+	var counter = 0;
 	display = function (key, value) {
 		if(typeof(value) == "object") {
 			$.each(value, display);
 		} else {
-			$("#table2").append("<th>"+ key + "</th>");
-			$("#table2").append("<tr><td>" + value);
+			$("#testing").append("<div class='row'><div class='span1' id=" + $.trim(key) + $.trim(counter) + ">" + $.trim(key) + "</div><div class='span3 offset2'>" + $.trim(value) + "</div>");
 		}
+		counter += 1;
 	};
 
 	// search for specific bill and get detailed information returned
@@ -71,9 +71,9 @@ $(document).ready(function() {
 		$("#counter h3").html("");
 		$(".table").html("");
 
-		$.getJSON("http://openstates.org/api/v1/bills/ut/" + session + "/" + billId +"?fields=bill_id,sponsors,title,chamber,actions.date,actions.actor,actions.action,sponsors.name,sponsors.type,votes.yes_count,votes.data,votes.chamber,votes.motion,votes.no_count,votes.passed,votes.type,sources,versions.url,versions.name&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
+		$.getJSON("http://openstates.org/api/v1/bills/ut/" + session + "/" + billId +"?fields=bill_id,sponsors,title,chamber,actions.date,actions.actor,actions.action,sponsors.name,sponsors.type,votes.yes_count,votes.data,votes.chamber,votes.motion,votes.no_count,votes.type,sources,versions.url,versions.name,votes.passed&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
 
-			$('#table').append('<thead id="table2"><tr></tr></thead><tbody><tr></tr></tbody>');
+			// $('#table').append('<thead id="table2"><tr></tr></thead><tbody><tr></tr></tbody>');
 
 			$.each(json, display);
 			
