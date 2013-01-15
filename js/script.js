@@ -58,7 +58,7 @@ $(document).ready(function() {
 		if(typeof(value) == "object") {
 			$.each(value, display);
 		} else {
-			$("#testing").append("<div class='row'><div class='span1' id=" + $.trim(key) + $.trim(counter) + "><strong>" + $.trim(key) + "</strong></div><div class='span4 offset1' id=" + $.trim(counter) + $.trim(key) + ">" + $.trim(value) + "</div>");
+			$("#testing").append("<div class='row'><div class='span1 " + key +"' id=" + $.trim(key) + $.trim(counter) + "><strong>" + $.trim(key) + "</strong></div><div class='span4 offset1' id=" + $.trim(counter) + $.trim(key) + ">" + $.trim(value) + "</div>");
 		}
 		counter += 1;
 	};
@@ -150,5 +150,39 @@ $(document).ready(function() {
 			checkAndSearch();
 		}
 	});
+
+	// for testing purposes --------
+	// ------------------------
+
+	var testingBill = function () {
+		var session = "2011";
+		var billId = "HB 10";
+		$("#loading").removeClass("hide");
+
+		resetHtml();
+
+		$.getJSON("http://openstates.org/api/v1/bills/ut/" + session + "/" + billId +"?fields=bill_id,sponsors,title,chamber,actions.date,actions.actor,actions.action,sponsors.name,sponsors.type,votes.yes_count,votes.data,votes.chamber,votes.motion,votes.no_count,votes.type,sources,versions.url,versions.name,votes.passed&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
+
+			// $('#table').append('<thead id="table2"><tr></tr></thead><tbody><tr></tr></tbody>');
+
+			$.each(json, displayTest);
+			console.log(json);
+			
+			$("#loading").addClass("hide");
+			
+		});
+
+	};
+
+	displayTest = function (key, value) {
+		if(typeof(value) == "object") {
+			$.each(value, displayTest);
+		} else {
+			$("#testing").append("<div class='row'><div class='span1 " + key +"' id=" + $.trim(key) + $.trim(counter) + "><strong>" + $.trim(key) + "</strong></div><div class='span4 offset1' id=" + $.trim(counter) + $.trim(key) + ">" + $.trim(value) + "</div>");
+		}
+		counter += 1;
+	};
+
+	// testingBill();
 
 });
