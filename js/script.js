@@ -66,19 +66,30 @@ $(document).ready(function() {
 	// search for specific bill and get detailed information returned
 	var getBill = function () {
 		var session = $("#sessionInput").val();
-		var billId = $("#term").val();
+		var billId = $("#term").val().toUpperCase();
 		$("#loading").removeClass("hide");
 
 		resetHtml();
+		var success = false;
+		// Set a 5-second (or however long you want) timeout to check for errors
+		setTimeout(function() {
+			if (!success) {
+				// Handle error accordingly
+				$(".table").html('<h2 class="loading">By golly, nothing came up with that search. Try again.');
+				$("#loading").addClass("hide");
+			}
+		}, 2000);
 
 		$.getJSON("http://openstates.org/api/v1/bills/ut/" + session + "/" + billId +"?fields=bill_id,sponsors,title,chamber,actions.date,actions.actor,actions.action,sponsors.name,sponsors.type,votes.yes_count,votes.data,votes.chamber,votes.motion,votes.no_count,votes.type,sources,versions.url,versions.name,votes.passed&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
 
-			// $('#table').append('<thead id="table2"><tr></tr></thead><tbody><tr></tr></tbody>');
+			
+			
 
 			$.each(json, display);
 			
 			$("#loading").addClass("hide");
 			
+			success = true;
 		});
 
 	};
@@ -125,7 +136,15 @@ $(document).ready(function() {
 	// check which radio button is selected and search appropriatly 
 	var checkAndSearch = function () {
 		if ($("input[name='optionsRadios']:checked").val() === "bill_id") {
-			getBill();
+			if($("#sessionInput").val() !== "") {
+				if($("#term").val() !== "") {
+					getBill();
+				} else {
+					alert("Please enter bill id like: HB 10 or HB 344");
+				}
+			} else {
+				alert("Please enter session data like: 2012 or 20092012");
+			}
 		} else{
 			searchBills();
 		}
@@ -153,6 +172,7 @@ $(document).ready(function() {
 
 	// for testing purposes --------
 	// ------------------------
+	// ---------------------
 
 	var testingBill = function () {
 		var session = "2011";
