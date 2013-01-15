@@ -58,7 +58,7 @@ $(document).ready(function() {
 		if(typeof(value) == "object") {
 			$.each(value, display);
 		} else {
-			$("#testing").append("<div class='row'><div class='span1 " + key +"' id=" + $.trim(key) + $.trim(counter) + "><strong>" + $.trim(key) + "</strong></div><div class='span4 offset1' id='k" + $.trim(counter) + $.trim(key) + "'>" + $.trim(value) + "</div>");
+			$("#testing").append("<div class='row'><div class='span1 " + key +"' id=" + $.trim(key) + $.trim(counter) + "><strong>" + $.trim(key) + "</strong></div><div class='span4 offset1 " + key +"Result' id='k" + $.trim(counter) + $.trim(key) + "'>" + $.trim(value) + "</div>");
 		}
 		counter += 1;
 	};
