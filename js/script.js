@@ -257,7 +257,7 @@ $(document).ready(function() {
 		counter += 1;
 	};
 
-	searchBills();
+	// searchBills();
 
 	
 
