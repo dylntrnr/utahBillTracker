@@ -63,6 +63,44 @@ $(document).ready(function() {
 		counter += 1;
 	};
 
+	// Inserting new get bill function
+	// 
+	// _________________________________
+	// 
+	
+	getBillFromTable = function (billid, sessionid) {
+		var session = sessionid;
+		var billId = billid;
+		$("#loading").removeClass("hide");
+
+		resetHtml();
+		var success = false;
+		// Set a 5-second (or however long you want) timeout to check for errors
+		setTimeout(function() {
+			if (!success) {
+				// Handle error accordingly
+				$(".table").html('<h2 class="loading">By golly, nothing came up with that search. Try again.');
+				$("#loading").addClass("hide");
+			}
+		}, 2000);
+
+		$.getJSON("http://openstates.org/api/v1/bills/ut/" + session + "/" + billId +"?fields=bill_id,sponsors,title,chamber,actions.date,actions.actor,actions.action,sponsors.name,sponsors.type,votes.yes_count,votes.data,votes.chamber,votes.motion,votes.no_count,votes.type,sources,versions.url,versions.name,votes.passed&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
+
+			
+			
+
+			$.each(json, display);
+			
+			$("#loading").addClass("hide");
+			
+			success = true;
+		});
+	};
+
+
+	// ENDing new get bill function
+	// --------------------------
+
 	// search for specific bill and get detailed information returned
 	var getBill = function () {
 		var session = $("#sessionInput").val();
@@ -117,20 +155,36 @@ $(document).ready(function() {
 					if (i === json.length) {
 						$('#table thead tr').append('<th>#</th><th>title</th><th>bill Id</th><th>session</th><th>subjects</th>');
 					} else {
-						$('#table tbody').append('<tr><td><strong>' + i + '</strong></td><td>' + $.trim(json[i].title) + '</td><td>' + $.trim(json[i].bill_id) +'</td><td>' + $.trim(json[i].session) + '</td><td>' + $.trim(json[i].subjects) +'</td></tr>');
+						$('#table tbody').append('<tr class="tablerow"><td><strong>' + i + '</strong></td><td class="tt">' + $.trim(json[i].title) + '</td><td id="billid">' + $.trim(json[i].bill_id) +'</td><td id="sessionid">' + $.trim(json[i].session) + '</td><td>' + $.trim(json[i].subjects) +'</td></tr>');
 					}
 
 					$("#counter h3").html("Found: " + (json.length-1) + " results.");
 					$("#loading").addClass("hide");
 
+
 				}
+
 			} else if (json.length === 0) {
 				$(".table").html('<h2 class="loading">By golly, nothing came up with that search. Try again.');
 				$("#loading").addClass("hide");
 			} else  {
 				getBill();
 			}
+			$(".tablerow").hover(function () {
+				$(this).css('cursor','pointer');
+			}, function() {
+				$(this).css('cursor','auto');
+			});
+
+			$(".tablerow").click(function () {
+				var billid = $(this).children("#billid").text();
+				var sessionid = $(this).children("#sessionid").text();
+
+				getBillFromTable(billid, sessionid);
+
+			});
 		});
+
 	};
 
 	// check which radio button is selected and search appropriatly 
@@ -203,6 +257,8 @@ $(document).ready(function() {
 		counter += 1;
 	};
 
-	// testingBill();
+	searchBills();
+
+	
 
 });
