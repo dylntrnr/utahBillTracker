@@ -108,6 +108,7 @@ $(document).ready(function() {
 		$("#loading").removeClass("hide");
 
 		resetHtml();
+		hashAndTitle(session, billId);
 		var success = false;
 		// Set a 5-second (or however long you want) timeout to check for errors
 		setTimeout(function() {
@@ -140,18 +141,30 @@ $(document).ready(function() {
 		$("#testing").html("");
 		counter = 0;
 	};
+
+	var hashAndTitle = function (searchTerm, billId) {
+		if(billId) {
+			console.log(billId + "is here");
+		}
+		location.hash = searchTerm.replace(/ /g, '-');
+		document.title = searchTerm;
+	};
+
 	// search for non - specific bill
 	var searchBills = function () {
 		
 		var searchTerm = $('#term').val();
 		resetHtml();
+		hashAndTitle(searchTerm);
 		
 		$.getJSON("http://openstates.org/api/v1/bills/?q=" + searchTerm + "&state=ut&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
+
+			console.log(json);
 
 			$('#table').append('<thead id="table2"><tr></tr></thead><tbody><tr></tr></tbody>');
 
 			if (json.length !== 0 && !json[0].hasOwnProperty("sponsors")) {
-				for (var i = json.length; i > 0; i--) {
+				for (var i = json.length; i >= 0; i--) {
 					if (i === json.length) {
 						$('#table thead tr').append('<th>#</th><th>title</th><th>bill Id</th><th>session</th><th>subjects</th>');
 					} else {
@@ -223,6 +236,29 @@ $(document).ready(function() {
 			checkAndSearch();
 		}
 	});
+
+	history.pushState(
+		// date
+		// title
+		// url
+		'some date',
+		'My title',
+		"my-page"
+
+	);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	// for testing purposes --------
 	// ------------------------
