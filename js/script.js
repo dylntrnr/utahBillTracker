@@ -244,8 +244,7 @@ $(document).ready(function() {
 		// title
 		// url
 		'some date',
-		'My title',
-		"my-page"
+		'My title'
 
 	);
 
