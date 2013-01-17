@@ -74,6 +74,7 @@ $(document).ready(function() {
 		$("#loading").removeClass("hide");
 
 		resetHtml();
+		hashAndTitle(session, billId);
 		var success = false;
 		// Set a 5-second (or however long you want) timeout to check for errors
 		setTimeout(function() {
@@ -82,7 +83,7 @@ $(document).ready(function() {
 				$(".table").html('<h2 class="loading">By golly, nothing came up with that search. Try again.');
 				$("#loading").addClass("hide");
 			}
-		}, 2000);
+		}, 5000);
 
 		$.getJSON("http://openstates.org/api/v1/bills/ut/" + session + "/" + billId +"?fields=bill_id,sponsors,title,chamber,actions.date,actions.actor,actions.action,sponsors.name,sponsors.type,votes.yes_count,votes.data,votes.chamber,votes.motion,votes.no_count,votes.type,sources,versions.url,versions.name,votes.passed&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
 
@@ -105,7 +106,6 @@ $(document).ready(function() {
 	var getBill = function () {
 		var session = $("#sessionInput").val();
 		var billId = $("#term").val().toUpperCase();
-		$("#loading").removeClass("hide");
 
 		resetHtml();
 		hashAndTitle(session, billId);
@@ -143,11 +143,13 @@ $(document).ready(function() {
 	};
 
 	var hashAndTitle = function (searchTerm, billId) {
-		if(billId) {
-			console.log(billId + "is here");
+		if(arguments.length === 2) {
+			location.hash = (billId + '-' + searchTerm).replace(/ /g, '-');
+			document.title = billId;
+		} else {
+			location.hash = searchTerm.replace(/ /g, '-');
+			document.title = searchTerm;
 		}
-		location.hash = searchTerm.replace(/ /g, '-');
-		document.title = searchTerm;
 	};
 
 	// search for non - specific bill
@@ -159,23 +161,23 @@ $(document).ready(function() {
 		
 		$.getJSON("http://openstates.org/api/v1/bills/?q=" + searchTerm + "&state=ut&apikey=c13dee9099be4512a8bca6ad4f94c4aa&callback=?", function(json) {
 
-			console.log(json);
+			
 
 			$('#table').append('<thead id="table2"><tr></tr></thead><tbody><tr></tr></tbody>');
 
 			if (json.length !== 0 && !json[0].hasOwnProperty("sponsors")) {
-				for (var i = json.length; i >= 0; i--) {
+				for (var i = (json.length); i >= 0; i--) {
 					if (i === json.length) {
 						$('#table thead tr').append('<th>#</th><th>title</th><th>bill Id</th><th>session</th><th>subjects</th>');
 					} else {
 						$('#table tbody').append('<tr class="tablerow"><td><strong>' + i + '</strong></td><td class="tt">' + $.trim(json[i].title) + '</td><td id="billid">' + $.trim(json[i].bill_id) +'</td><td id="sessionid">' + $.trim(json[i].session) + '</td><td>' + $.trim(json[i].subjects) +'</td></tr>');
 					}
 
-					$("#counter h3").html("Found: " + (json.length-1) + " results.");
-					$("#loading").addClass("hide");
 
 
 				}
+					$("#counter h3").html("Found: " + (json.length-1) + " results.");
+					$("#loading").addClass("hide");
 
 			} else if (json.length === 0) {
 				$(".table").html('<h2 class="loading">By golly, nothing came up with that search. Try again.');
@@ -200,7 +202,7 @@ $(document).ready(function() {
 
 	};
 
-	// check which radio button is selected and search appropriatly 
+	// check which radio button is selected and search appropriately
 	var checkAndSearch = function () {
 		if ($("input[name='optionsRadios']:checked").val() === "bill_id") {
 			if($("#sessionInput").val() !== "") {
