@@ -239,14 +239,14 @@ $(document).ready(function() {
 		}
 	});
 
-	history.pushState(
-		// date
-		// title
-		// url
-		'some date',
-		'My title'
+	// history.pushState(
+	// 	// date
+	// 	// title
+	// 	// url
+	// 	'some date',
+	// 	'My title'
 
-	);
+	// );
 
 
 

@@ -1,0 +1,125 @@
+body {
+	margin:0 auto;
+	}
+.container {
+	}
+.masthead {
+	border-bottom:solid 1px #ddd;
+	width:100%;
+	margin: 20px 0 40px 0;
+	padding:10px 0 40px 0;
+	text-align:left;
+	}
+#mainpagetitle {
+	margin-top:20px;
+}
+#mainpagetitle h1 {
+	margin-bottom:-5px;
+}
+#abumainlogo {
+	border-left:4px #ddd solid;
+	padding:10px;
+}
+#betterUtah {
+	width:30%;
+	float:right;
+	margin: -170px 0 0 100px;
+	}
+#betterUtah img {
+	width:170px;
+	margin:0 auto;
+	display:block;
+	float:right;
+	-ms-transform: rotate(15deg);
+	-webkit-transform: rotate(15deg);
+	-o-transform: rotate(15deg);
+	-moz-transform: rotate(15deg);
+	transform: rotate(15deg);
+	}
+#description {
+	text-indent:25px;
+	padding:5px 100px 10px 100px;
+	}
+#sessionInput {
+	text-align:left;
+	padding: 3px 10px;
+	margin: 0 0 10px 0;
+	border: 1px solid #ccc;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);
+	-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);
+	box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);
+	-webkit-transition:border linear .1s,box-shadow linear .1s;
+	-moz-transition: border linear .1s,box-shadow linear .1s;
+	-o-transition: border linear .1s,box-shadow linear .1s;
+	-ms-transition:border linear .1s,box-shadow linear .1s;
+	transition: border linear .1s,box-shadow linear .1s;
+	}
+#counter h3 {
+	font-size:23px;
+	}
+#testing {
+	margin:20px auto;
+	}
+#table th {
+	text-transform:uppercase;
+	}
+.row {
+	margin-top:5px;
+	}
+.span1 {
+	text-transform:uppercase;
+	color:#666;
+	}
+div.span4:first-letter {
+	text-transform:uppercase;
+	}
+.titleResult {
+	font-weight:bold;
+	font-size:16px !important;
+	border-bottom:1px solid #000;
+	padding-bottom:20px;
+	padding-top:20px;
+	}
+.title {
+	padding-top:20px;
+	}
+div.urlResult:first-letter {
+	text-transform:lowercase !important;
+	}
+.date {
+	}
+.dateResult, .actorResult, .actionResult {
+	background-color:#eee;
+	padding:3px;
+	}
+.type {
+	padding-top:20px;
+	}
+.typeResult {
+	padding-top:20px;
+	}
+.nameResult {
+	font-style:italic;
+	font-weight:bold;
+	}
+.chamberResult, .idResult, .bill_idResult {
+	text-transform:uppercase;
+	font-weight:bold;
+	}
+#k2name, #k5name {
+	font-style:normal !important;
+	font-weight:normal !important;
+	}
+.passedResult {
+	color: #468847;
+	background-color: #DFF0D8;
+	border:1px solid #D6E9C6;
+	font-weight:bold;
+	}
+footer {
+	border-top: solid 1px #ddd;
+	padding:10px 0 0 0;
+	}
+footer p {
+	text-align:center;
+	}

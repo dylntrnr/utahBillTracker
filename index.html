@@ -1,13 +1,15 @@
+
 <!DOCTYPE HTML>
 <html>
 	<head>
 		<META http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="http://patrickthompson.me/abubillsearch/style.css" rel="stylesheet">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="./css/stylenew.css" rel="stylesheet">
+		<link href="./css/bootstrap.min.css" rel="stylesheet">
 		<script type="text/javascript" src="./js/jquery.js"></script>
+	    <script src="./js/bootstrap.min.js"></script>
+	    <script src="./js/bootstrap-typeahead.js"></script>
 		<script type="text/javascript" src="./js/script.js"></script>
-		<script type="text/javascript" src="./js/jquery-hashchange-plugin.min.js"></script>
 
 		
 	</head>
@@ -17,32 +19,52 @@
 		<div class="container">
 			
 			<div class="masthead">
-				
-				<h1>Utah State Legislative Bill Search</h1>
-				
-			</div>
-			<div id="betterUtah">
-			<img src="http://patrickthompson.me/abubillsearch/abu-billsearchsponsorbug.png" alt="A Better UTAH Project" title="A Better UTAH Project" />
+				<div class="row">
+					<div class="span8" id="mainpagetitle">
+						<h1>Utah State Legislative Bill Search</h1>
+						<div class="row">
+							<div class="span3 offset5 muted">
+								<h3>A Project of ABU</h3>
+							</div>
+						</div>
+					</div>
+					<div class="span4">
+								<img src="https://secure3.convio.net/pn/images/content/pagebuilder/Alliance_horizontal-EMAIL-trans.png" alt="" id="abumainlogo" />
+					</div>
+				</div>
 			</div>
 			
 			
-			<p id="description">Please use the search function below to find pending bills in the Utah State Legislature. If you know the Bill ID of a specific bill, you can enter that to find more information pertaining to that bill. Otherwise, you can enter keywords, to discover more about the bills being proposed at the legislature. Also, for a full list of bills, leave the search field blank and hit the search button.</p>
+			<p id="description">Please use the search function below to find current (and past) bills in the Utah State Legislature. If you know the "Bill ID" of a specific bill (i.e. HB 363), you can use the <em>Search by Bill ID</em> function and enter the Bill ID as well as the Session year to find detailed information pertaining to status of that bill. Otherwise, you can use the <em>Keyword Search</em> and enter keywords to discover more about the bills being proposed at the legislature. Additionally, for a full list of bills (from 2013-2011), leave the search field blank and hit the <em>Search</em> button.</p>
 			
 			<div id="searchBox" class="hide">
-			
-				<label class="radio" id="radio1">
-					<input type="radio" name="optionsRadios" id="optionsRadio1" value="title" checked>Title - for basic information
-				</label>
-				<label class="radio" id="radio2">
-					<input type="radio" name="optionsRadios" id="optionsRadio2" value="bill_id">Id - for detailed information
-				</label>
-				<!-- <label class="radio inline">
-					<input type="radio" name="optionsRadios" id="optionsRadio3" value="option3">Session
-				</label> -->
-				<div class="hide" id="session"><input type="" id="sessionInput" class="input-small" placeholder="Session Year..."></div>
-			
-				<input type="text" class="input-medium search-query" data-provide="typeahead" id="term" placeholder="Search for bills..." autocomplete="off">
-				<button id="search" class="btn">Search</button>
+				<div class="row">
+					<div class="span5 offset1">
+						<label class="radio" id="radio1">
+							<input type="radio" name="optionsRadios" id="optionsRadio1" value="title" checked><strong>Keyword Search</strong><span class="help-inline muted">Provides Basic Information</span>
+						</label>
+					</div>
+					<div class="span6">
+						<label class="radio" id="radio2">
+							<input type="radio" name="optionsRadios" id="optionsRadio2" value="bill_id"><strong>Search by Bill ID</strong><span class="help-inline muted">Provides Detailed Information</span>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span8 offset4">
+						<div class="hide" id="session"><input type="" id="sessionInput" class="input-small" placeholder="Session"><span class="help-inline">Enter the session year</span></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span8 offset4">
+						
+							<div class="input-append">
+								<input type="text" class="input-medium search-query" data-provide="typeahead" id="term" placeholder="Search for bills..." autocomplete="off">
+								<button type="submit" id="search" class="btn"><i class="icon-search"></i> Search</button>
+							</div>
+						
+					</div>
+				</div>
 			</div>
 				
 				
@@ -69,8 +91,5 @@
 			
 			
 		</div>
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-typeahead.js"></script>
 	</body>
 </html>
