@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -11,13 +10,13 @@
 	    <script src="./js/bootstrap-typeahead.js"></script>
 		<script type="text/javascript" src="./js/script.js"></script>
 
-		
+
 	</head>
-	
+
 	<body>
-		
+
 		<div class="container">
-			
+
 			<div class="masthead">
 				<div class="row">
 					<div class="span8" id="mainpagetitle">
@@ -33,10 +32,10 @@
 					</div>
 				</div>
 			</div>
-			
-			
+
+
 			<p id="description">Please use the search function below to find current (and past) bills in the Utah State Legislature. If you know the "Bill ID" of a specific bill (i.e. HB 363), you can use the <em>Search by Bill ID</em> function and enter the Bill ID as well as the Session year to find detailed information pertaining to status of that bill. Otherwise, you can use the <em>Keyword Search</em> and enter keywords to discover more about the bills being proposed at the legislature. Additionally, for a full list of bills (from 2013-2011), leave the search field blank and hit the <em>Search</em> button.</p>
-			
+
 			<div id="searchBox" class="hide">
 				<div class="row">
 					<div class="span5 offset1">
@@ -52,44 +51,46 @@
 				</div>
 				<div class="row">
 					<div class="span12 textCenter">
-						<div class="hide" id="session"><input type="" class="input-small" id="sessionInput"placeholder="Session"><span class="help-inline">Enter the session year</span></div>
+
+						<div class="hide" id="session"><input type="text" class="input-small" id="sessionInput" placeholder="Session"><span class="help-inline">Enter the session year</span></div>
+
 					</div>
 				</div>
 				<div class="row">
 					<div class="span12 textCenter">
-						
+
 							<div class="input-append">
 								<input type="text" class="input-medium" data-provide="typeahead" id="term" placeholder="Search for bills..." autocomplete="off">
 								<button type="submit" id="search" class="btn"><i class="icon-search"></i> Search</button>
 							</div>
-						
+
 					</div>
 				</div>
 			</div>
-				
-				
-			
+
+
+
 				<div id="counter">
 					<h3></h3>
 				</div>
-			
+
 			<div class="container">
-				
+
 				<div id="testing"></div>
-				
+
 				<table id="table" class="table">
-				
+
 				</table>
-				
+
 				<h3 id="loading" class="hide">loading...</h3>
-			
+
 			<footer>
 				<p>Created by Better UTAH<br />&copy 2013, All Rights Reserved<br /><a href="http://betterutah.org">www.betterutah.org</a></p>
 			</footer>
-			
+
 			</div>
-			
-			
+
+
 		</div>
 	</body>
 </html>
