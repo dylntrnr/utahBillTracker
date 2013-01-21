@@ -42,18 +42,24 @@ body {
 	}
 #sessionInput {
 	text-align:left;
-	padding: 3px 10px;
+	padding: 4px 6px;
 	margin: 0 0 10px 0;
+	-webkit-border-radius:4px 0 0 4px;
+	-moz-border-radius:4px 0 0 4px;
+	border-radius:4px 0 0 4px;
 	border: 1px solid #ccc;
 	-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);
 	-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);
 	box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);
-	-webkit-transition:border linear .1s,box-shadow linear .1s;
-	-moz-transition: border linear .1s,box-shadow linear .1s;
-	-o-transition: border linear .1s,box-shadow linear .1s;
-	-ms-transition:border linear .1s,box-shadow linear .1s;
-	transition: border linear .1s,box-shadow linear .1s;
+	-webkit-transition:border linear .2s,box-shadow linear .2s;
+	-moz-transition: border linear .2s,box-shadow linear .2s;
+	-o-transition: border linear .2s,box-shadow linear .2s;
+	-ms-transition:border linear .2s,box-shadow linear .2s;
+	transition: border linear .2s,box-shadow linear .2s;
 	}
+.textCenter {
+	text-align:center;
+}
 #counter h3 {
 	font-size:23px;
 	}
