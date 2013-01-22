@@ -103,8 +103,14 @@ div.urlResult:first-letter {
 	text-transform:lowercase !important;
 	}
 .date {
+	padding-top:10px;
 	}
-.dateResult, .actorResult, .actionResult {
+.dateResult {
+	background-color:#eee;
+	padding:3px 3px 3px 3px;
+	margin:10px 0 0 0;
+}
+.actorResult, .actionResult {
 	background-color:#eee;
 	padding:3px;
 	}
