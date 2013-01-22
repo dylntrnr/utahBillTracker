@@ -103,7 +103,11 @@ div.urlResult:first-letter {
 	text-transform:lowercase !important;
 	}
 .date {
+	padding-top:10px;
 	}
+.daeresult {
+	padding-top:10px;
+}
 .dateResult, .actorResult, .actionResult {
 	background-color:#eee;
 	padding:3px;
