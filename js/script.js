@@ -57,6 +57,8 @@ $(document).ready(function() {
 	display = function (key, value) {
 		if(typeof(value) == "object") {
 			$.each(value, display);
+		} else if(key === "url") {
+			$("#testing").append("<div class='row'><div class='span1 " + key +"' id=" + $.trim(key) + $.trim(counter) + "><strong>" + $.trim(key) + "</strong></div><div class='span9 offset1 " + key +"Result' id='K" + $.trim(key) + "'><a href='" + $.trim(value) + "'>" + $.trim(value) + "</a></div>");
 		} else {
 			$("#testing").append("<div class='row'><div class='span1 " + key +"' id=" + $.trim(key) + $.trim(counter) + "><strong>" + $.trim(key) + "</strong></div><div class='span9 offset1 " + key +"Result' id='K" + $.trim(key) + "'>" + $.trim(value) + "</div>");
 		}
