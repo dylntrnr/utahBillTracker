@@ -106,9 +106,10 @@ div.urlResult:first-letter {
 	padding-top:10px;
 	}
 .dateResult {
-	padding-top:10px;
+	background-color:#eee;
+	padding:10px 3px 3px 3px;
 }
-.dateResult, .actorResult, .actionResult {
+.actorResult, .actionResult {
 	background-color:#eee;
 	padding:3px;
 	}
