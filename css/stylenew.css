@@ -107,7 +107,8 @@ div.urlResult:first-letter {
 	}
 .dateResult {
 	background-color:#eee;
-	padding:10px 3px 3px 3px;
+	padding:3px 3px 3px 3px;
+	margin:10px 0 0 0;
 }
 .actorResult, .actionResult {
 	background-color:#eee;
