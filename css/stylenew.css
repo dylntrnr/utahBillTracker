@@ -16,9 +16,18 @@ body {
 #mainpagetitle h1 {
 	margin-bottom:-5px;
 }
+.beta-tag	{
+	margin:0 0 -5px 20px !important;
+	padding:0;
+	font-family:monospace;
+}
+#mainpagetitle h3 {
+	text-align:center;
+}
 #abumainlogo {
 	border-left:4px #ddd solid;
 	padding:10px;
+	margin-top:-15px !important;
 }
 #betterUtah {
 	width:30%;
