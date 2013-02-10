@@ -8,7 +8,7 @@ $(document).ready(function() {
 	});
 
 	// This is all @geuis ---- lifesaver! 
-	var autocomplete = $('#term').typeahead()
+	var autocomplete = $('#term').typeahead({ autoSelect: false})
         .on('keyup', function(ev){
  
             ev.stopPropagation();
