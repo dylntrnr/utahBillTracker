@@ -1,5 +1,5 @@
 /* =============================================================
- * bootstrap-typeahead.js v2.2.1
+ * bootstrap-typeahead.js v2.0.4
  * http://twitter.github.com/bootstrap/javascript.html#typeahead
  * =============================================================
  * Copyright 2012 Twitter, Inc.
@@ -31,6 +31,7 @@
     this.options = $.extend({}, $.fn.typeahead.defaults, options)
     this.matcher = this.options.matcher || this.matcher
     this.sorter = this.options.sorter || this.sorter
+    this.autoSelect = typeof this.options.autoSelect == 'boolean' ? this.options.autoSelect : true
     this.highlighter = this.options.highlighter || this.highlighter
     this.updater = this.options.updater || this.updater
     this.$menu = $(this.options.menu).appendTo('body')
@@ -45,9 +46,11 @@
 
   , select: function () {
       var val = this.$menu.find('.active').attr('data-value')
-      this.$element
-        .val(this.updater(val))
-        .change()
+      if(this.autoSelect || val){
+        this.$element
+          .val(this.updater(val))
+          .change()
+      }
       return this.hide()
     }
 
@@ -141,7 +144,9 @@
         return i[0]
       })
 
-      items.first().addClass('active')
+      if (this.autoSelect) {
+        items.first().addClass('active')
+      }
       this.$menu.html(items)
       return this
     }
@@ -174,22 +179,13 @@
         .on('keypress', $.proxy(this.keypress, this))
         .on('keyup',    $.proxy(this.keyup, this))
 
-      if (this.eventSupported('keydown')) {
+      if ($.browser.webkit || $.browser.msie) {
         this.$element.on('keydown', $.proxy(this.keydown, this))
       }
 
       this.$menu
         .on('click', $.proxy(this.click, this))
         .on('mouseenter', 'li', $.proxy(this.mouseenter, this))
-    }
-
-  , eventSupported: function(eventName) {
-      var isSupported = eventName in this.$element
-      if (!isSupported) {
-        this.$element.setAttribute(eventName, 'return;')
-        isSupported = typeof this.$element[eventName] === 'function'
-      }
-      return isSupported
     }
 
   , move: function (e) {
@@ -217,7 +213,7 @@
     }
 
   , keydown: function (e) {
-      this.suppressKeyPressRepeat = !~$.inArray(e.keyCode, [40,38,9,13,27])
+      this.suppressKeyPressRepeat = !~[40,38,9,13,27].indexOf(e.keyCode)
       this.move(e)
     }
 
@@ -230,9 +226,6 @@
       switch(e.keyCode) {
         case 40: // down arrow
         case 38: // up arrow
-        case 16: // shift
-        case 17: // ctrl
-        case 18: // alt
           break
 
         case 9: // tab
@@ -300,11 +293,13 @@
  /*   TYPEAHEAD DATA-API
   * ================== */
 
-  $(document).on('focus.typeahead.data-api', '[data-provide="typeahead"]', function (e) {
-    var $this = $(this)
-    if ($this.data('typeahead')) return
-    e.preventDefault()
-    $this.typeahead($this.data())
+  $(function () {
+    $('body').on('focus.typeahead.data-api', '[data-provide="typeahead"]', function (e) {
+      var $this = $(this)
+      if ($this.data('typeahead')) return
+      e.preventDefault()
+      $this.typeahead($this.data())
+    })
   })
 
 }(window.jQuery);
